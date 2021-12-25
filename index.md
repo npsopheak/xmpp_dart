@@ -1,37 +1,106 @@
-## Welcome to GitHub Pages
+## XmppStone
 
-You can use the [editor on GitHub](https://github.com/npsopheak/xmpp_dart/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+> I will update and the documentation later for the stable release.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Below Original Readme forked from: https://github.com/vukoye/xmpp_dart
 
-### Markdown
+Lightweight XMPP client library written completely in Dart.
+My intention is to write simple to use library for future XMPP client based on Flutter.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+__Supported documents:__
+ - __RFC6120__: Extensible Messaging and Presence Protocol (XMPP): Core 
+ - __RFC6121__: Extensible Messaging and Presence Protocol (XMPP): Instant Messaging and Presence
+ - __XEP-0198__: Stream Management
+ - __XEP-0085__: Chat State Notifications
+ - __XEP-0318__: Best Practices for Client Initiated Presence Probes
+ - __XEP-0280__: Message Carbons
 
-```markdown
-Syntax highlighted code block
+__Partly supported:__
+  - __XEP-0030__: Service Discovery
+  - __XEP-0313__: Message Archive Management
+  - __XEP-0079__: Adavanced Message Processing
 
-# Header 1
-## Header 2
-### Header 3
+__Actively working on:__ 
+  - __XEP-0059__: Result Set Management
+  - __XEP-0004__: Data Forms
 
-- Bulleted
-- List
+## Latest news
 
-1. Numbered
-2. List
+ - 2021-12-23: Updated supported for XEP-0079: Advance Message Processing, Update additional supporting element for MessageStanza (receive, request, time, custom), Add exposing message handler on received ack, delivered, sent, Fixed null safety
+ - 2020-10-30: Added support for XEP-0280: Message Carbons
+ - 2020-10-30: Added initial support for XEP-0313: Message Archive Management
+ - 2020-10-30: Added logging mechanism
+ - 2020-07-23: Added support for XEP-0318: Best Practices for Client Initiated Presence Probes
+ - 2020-05-02: Added initial support for XEP-0198 : Stream Management
+ - 2020-05-02: Added initial support for XEP-0085 : Chat State Notifications
+ - 2019-04-02: added support for: XEP-0054: vcard-temp
+ - 2019-04-01: added support for SHA-1 and SHA-256 authentication algorithm
 
-**Bold** and _Italic_ and `Code` text
+## Usage
 
-[Link](url) and ![Image](src)
+```dart
+import 'package:xmpp_stone_obelisk/xmpp_stone.dart' as xmpp;
+
+main() {
+  xmpp.Connection connection = new xmpp.Connection("user@domain", "password", 5222);
+  connection.open();
+}
+```
+## Features
+
+#### 1. Logging
+
+
+###### Log level
+
+Client can set logging level of the library with command:
+```dart
+Log.logLevel = LogLevel.VERBOSE;
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+###### XMPP traffic logging
 
-### Jekyll Themes
+Xmpp traffic can be enabled or disabled with:
+```dart
+Log.logXmpp = false
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/npsopheak/xmpp_dart/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### 2. Message Archive Management
+*Feature is work in progress, API is subject to change.*
 
-### Support or Contact
+Initial implementation of Message Archive Management.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+RST is not yet implemented.
+
+Usage:
+
+- Grabbing the module
+```dart
+connection.getMamModule()
+```
+
+- Querying all messages:
+
+```dart
+mamManager.queryAll();
+```
+
+- Querying messages based on date (All parameters are optional):
+
+```dart
+mamManager.queryByTime(start: startTime, end: endTime, jid: buddyJid);
+```
+
+- Querying messages based on messageId (All parameters are optional):
+This method requires *urn:xmpp:mam:2#extended* to be supported by the serve, soon it will be available to check feature support.
+
+```dart
+mamManager.queryById(beforeId: beforeId, afterId: afterId, jid: buddyJid});
+```
+
+Checking capabilities of the server:
+```dart
+mamManager.isQueryByDateSupported
+mamManager.isQueryByIdSupported
+mamManager.isQueryByJidSupported
+```
