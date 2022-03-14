@@ -121,7 +121,7 @@ Future<UsersConnection> initUser() async {
   var completer = Completer<UsersConnection>();
 
   Map<String,String> users = {
-    '1647-240077-542380-47b2339c2a355ed6': 'kuldeep',
+    '1647-248544-978918-77fc59ff2d19254f': 'kuldeep',
     // '1645-172186-380626-a86b135e92b91a62': 'Pandu',
     // '1645-172185-192393-a58cddac1966a202': 'Mattiase',
     // '1645-172183-991847-3fa4f971a33f74dd': 'Sean',
@@ -144,7 +144,7 @@ Future<UsersConnection> initUser() async {
     var atDomain = '${key}@${host}';
     var resource = '/${value}';
     var jid = '${atDomain}$resource';
-    var user = User(value, jid, password, XmppCommunicationCallback());
+    var user = User(value, jid, password, XmppCommunicationCallback(),true);
     user.connect((){
       if(++countUserConnected == users.length){
         completer.complete(usersConnection);

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'dart:io';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:xml/xml.dart' as xml;
@@ -55,6 +56,7 @@ class Connection {
   } //move this somewhere
 
   String? _serverName;
+  bool reconnection = false;
 
   static Connection getInstance(XmppAccountSettings account) {
     var connection = instances[account.fullJid.userAtDomain];
@@ -130,12 +132,17 @@ class Connection {
   ReconnectionManager? reconnectionManager;
 
   Connection(this.account) {
+
     RosterManager.getInstance(this);
     PresenceManager.getInstance(this);
     MessageHandler.getInstance(this);
     PingManager.getInstance(this);
     connectionNegotiationManager = ConnectionNegotiationManager(this, account);
-    reconnectionManager = ReconnectionManager(this);
+
+    if(account.isReconnection) {
+      reconnectionManager = ReconnectionManager(this);
+    }
+
   }
 
   void _openStream() {

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:xmpp_stone/src/access_point/communication_config.dart';
 import 'package:xmpp_stone/src/access_point/manager_message_params.dart';
 import 'package:xmpp_stone/src/access_point/manager_query_archive_params.dart';
@@ -59,6 +60,7 @@ class XMPPClientManager {
   String? host;
   String? mucDomain = '';
   late XMPPClientPersonel personel;
+  bool reconnecting = false;
   Function(XMPPClientManager _context)? _onReady;
   Function(String timestamp, String logMessage)? _onLog;
   Function(XMPPMessageParams message, ListenerType listenerType)? _onMessage;
@@ -93,9 +95,12 @@ class XMPPClientManager {
       void Function(xmpp.MessageArchiveResult)? onArchiveRetrieved,
       void Function(List<xmpp.Buddy>)? onRosterList,
       String? host,
-      String? this.mucDomain}) {
+      String? this.mucDomain,
+        bool reconnecting = false
+      }) {
     personel = XMPPClientPersonel(jid, password);
     LOG_TAG = '$LOG_TAG/$jid';
+    this.reconnecting = reconnecting;
     _onReady = onReady;
     _onLog = onLog;
     _onMessage = onMessage;
@@ -115,9 +120,10 @@ class XMPPClientManager {
     Log.d(LOG_TAG, 'Connecting to $host');
     var account = xmpp.XmppAccountSettings(
         personel.jid, jid.local, jid.domain, personel.password, 5222,
-        mucDomain: mucDomain, host: host, resource: jid.resource);
+        mucDomain: mucDomain, host: host, resource: jid.resource, isReconnection: reconnecting);
     _connection = xmpp.Connection(account);
     _connection!.connect();
+    _connection?.reconnection = reconnecting;
     _listenConnection();
     onLog('Start connecting');
     return this;
@@ -873,7 +879,9 @@ class ConnectionManagerStateChangedListener
       _context.onReady();
     } else if (state == xmpp.XmppConnectionState.Closed) {
       Log.i(_context.LOG_TAG, 'Disconnected');
-      _context._connection!.connect();
+      if (_connection?.reconnection ?? false) {
+        _context._connection!.connect();
+      }
     }
     _context.onState(state);
   }

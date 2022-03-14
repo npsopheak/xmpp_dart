@@ -9,17 +9,19 @@ class User {
   String name = '';
   String jid = '';
   String password = '';
+  bool reconnecting = false;
   XmppCommunicationCallback xmppCallback;
 
   late XMPPClientManager xmppClientManager;
 
-  User(this.name, this.jid, this.password, this.xmppCallback);
+  User(this.name, this.jid, this.password, this.xmppCallback,this.reconnecting );
 
   void connect(onReady){
     var fullJid = Jid.fromFullJid(this.jid);
     xmppClientManager = XMPPClientManager(
       this.jid,
       this.password,
+       reconnecting: this.reconnecting,
       onReady: (XMPPClientManager context) {
         context.listens();
         context.presenceSend(PresenceShowElement.CHAT, description: 'Working');
