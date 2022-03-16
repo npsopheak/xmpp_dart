@@ -61,21 +61,21 @@ class StanzaParser {
     'others': () => XmppElement(),
   };
 
-  static AbstractStanza? parseMessageStanzaAttribute(
-      AbstractStanza? stanza, xml.XmlElement element) {
+  static AbstractStanza parseMessageStanzaAttribute(
+      AbstractStanza stanza, xml.XmlElement element) {
     var fromString = element.getAttribute('from');
     if (fromString != null) {
       var from = Jid.fromFullJid(fromString);
-      stanza!.fromJid = from;
+      stanza.fromJid = from;
     }
     var toString = element.getAttribute('to');
     if (toString != null) {
       var to = Jid.fromFullJid(toString);
-      stanza!.toJid = to;
+      stanza.toJid = to;
     }
     var idString = element.getAttribute('id');
     if (idString != null) {
-      stanza!.id = idString;
+      stanza.id = idString;
     }
     // Look for message type if there are
     if (stanza is MessageStanza) {
@@ -92,8 +92,8 @@ class StanzaParser {
   }
 
   //TODO: Improve this!
-  static AbstractStanza? parseStanza(xml.XmlElement element) {
-    AbstractStanza? stanza;
+  static AbstractStanza parseStanza(xml.XmlElement element) {
+    late AbstractStanza stanza;
     var id = element.getAttribute('id');
     if (id == null) {
       Log.d(TAG, 'No id found for stanza');
@@ -106,9 +106,10 @@ class StanzaParser {
     } else if (element.name.local == 'presence') {
       stanza = _parsePresenceStanza(id, element);
     }
+
     stanza = parseMessageStanzaAttribute(stanza, element);
     element.attributes.forEach((xmlAttribute) {
-      stanza!.addAttribute(
+      stanza.addAttribute(
           XmppAttribute(xmlAttribute.name.local, xmlAttribute.value));
     });
     element.children.forEach((child) {
