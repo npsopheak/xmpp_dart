@@ -1,4 +1,3 @@
-import 'package:xmpp_stone/src/access_point/manager.dart';
 import 'package:xmpp_stone/xmpp_stone.dart';
 
 final String HOST = 'localhost';

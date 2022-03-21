@@ -102,8 +102,7 @@ class StreamManagementModule extends Negotiator {
   //TODO: Improve
   @override
   void negotiate(List<Nonza> nonzas) {
-    if (nonzas != null &&
-        nonzas.isNotEmpty &&
+    if (nonzas.isNotEmpty &&
         SMNonza.match(nonzas[0]) &&
         _connection.authenticated) {
       state = NegotiatorState.NEGOTIATING;

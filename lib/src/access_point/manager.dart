@@ -186,20 +186,16 @@ class XMPPClientManager {
   void vCardRead() {
     var vCardManager = xmpp.VCardManager(_connection!);
     vCardManager.getSelfVCard().then((vCard) {
-      if (vCard != null) {
         personel.profile = vCard;
-
         onLog('Your info' + vCard.buildXmlString());
-      }
     });
   }
 
   void vCardUpdate(xmpp.VCard Function(xmpp.VCard vCardToUpdate) _onUpdate) {
     var vCardManager = xmpp.VCardManager(_connection!);
     vCardManager.getSelfVCard().then((vCard) {
-      if (vCard != null) {
-        onLog('manager.vCardUpdate::my info ${vCard.buildXmlString()}');
-      }
+      onLog('manager.vCardUpdate::my info ${vCard.buildXmlString()}');
+      
       // Update vcard information
       var _vCardUpdated = _onUpdate(vCard);
 

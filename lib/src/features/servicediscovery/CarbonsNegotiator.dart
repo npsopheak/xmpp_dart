@@ -38,7 +38,6 @@ class CarbonsNegotiator extends Negotiator {
   @override
   List<Nonza> match(List<Nonza> requests) {
     return (requests.where((element) =>
-        element != null &&
         element is Feature &&
         ((element).xmppVar == 'urn:xmpp:carbons:2' ||
             (element).xmppVar == 'urn:xmpp:carbons:rules:0'))).toList();

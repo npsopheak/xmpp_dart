@@ -59,9 +59,7 @@ class ExampleConnectionStateChangedListener
       Log.d(TAG, 'Connected');
       var vCardManager = xmpp.VCardManager(_connection!);
       vCardManager.getSelfVCard().then((vCard) {
-        if (vCard != null) {
           Log.d(TAG, 'Your info' + vCard.buildXmlString());
-        }
       });
       var messageHandler = xmpp.MessageHandler.getInstance(_connection);
       var rosterManager = xmpp.RosterManager.getInstance(_connection);
@@ -75,14 +73,12 @@ class ExampleConnectionStateChangedListener
         }
       });
       sleep(const Duration(seconds: 1));
-      vCardManager.getVCardFor(receiverJid).then((vCard) {
-        if (vCard != null) {
-          Log.d(TAG, 'Receiver info' + vCard.buildXmlString());
-          if (vCard != null && vCard.image != null) {
-            var file = File('test456789.jpg')
-              ..writeAsBytesSync(image.encodeJpg(vCard.image!));
-            Log.d(TAG, 'IMAGE SAVED TO: ${file.path}');
-          }
+      vCardManager.getVCardFor(receiverJid).then((vCard) { 
+        Log.d(TAG, 'Receiver info' + vCard.buildXmlString());
+        if (vCard.image != null) {
+          var file = File('test456789.jpg')
+            ..writeAsBytesSync(image.encodeJpg(vCard.image!));
+          Log.d(TAG, 'IMAGE SAVED TO: ${file.path}');
         }
       });
       var presenceManager = xmpp.PresenceManager.getInstance(_connection);

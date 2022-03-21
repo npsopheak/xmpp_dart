@@ -24,7 +24,7 @@ class StartTlsNegotiator extends Negotiator {
   @override
   void negotiate(List<Nonza> nonzas) {
     Log.d(TAG, 'negotiating starttls');
-    if (match(nonzas) != null) {
+    if (match(nonzas).isNotEmpty) {
       state = NegotiatorState.NEGOTIATING;
       subscription = _connection!.inNonzasStream.listen(checkNonzas);
       _connection!.writeNonza(StartTlsResponse());

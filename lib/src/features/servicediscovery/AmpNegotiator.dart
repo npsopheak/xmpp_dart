@@ -30,7 +30,6 @@ class AmpNegotiator extends Negotiator {
   @override
   List<Nonza> match(List<Nonza> requests) {
     return (requests.where((element) =>
-        element != null &&
         element is Feature &&
         ((element).xmppVar == expectedName))).toList();
   }

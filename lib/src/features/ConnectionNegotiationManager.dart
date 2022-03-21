@@ -54,7 +54,7 @@ class ConnectionNegotiationManager {
         .toList();
     supportedNegotiatorList.forEach((negotiator) {
       var matchingNonzas = negotiator.match(nonzas);
-      if (matchingNonzas != null && matchingNonzas.isNotEmpty) {
+      if (matchingNonzas.isNotEmpty) {
         waitingNegotiators
             .add(NegotiatorWithSupportedNonzas(negotiator, matchingNonzas));
       }
@@ -167,7 +167,7 @@ class ConnectionNegotiationManager {
         'ADDING FEATURES count: ${supportedFeatures.length} $supportedFeatures ');
     supportedNegotiatorList.forEach((negotiator) {
       var matchingNonzas = negotiator.match(supportedFeatures);
-      if (matchingNonzas != null && matchingNonzas.isNotEmpty) {
+      if (matchingNonzas.isNotEmpty) {
         Log.d(TAG, 'Adding negotiator: $negotiator $matchingNonzas');
         waitingNegotiators
             .add(NegotiatorWithSupportedNonzas(negotiator, matchingNonzas));
