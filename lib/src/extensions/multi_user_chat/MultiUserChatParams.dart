@@ -257,11 +257,11 @@ class GroupChatroomFormParams {
 MONGOOSEIM
 <?xml version="1.0" encoding="UTF-8"?>
 <xmpp_stone>
-   <iq from="test2b3626e00-7789-11ec-b82f-6dc971962c7e@conference.dev.xmpp.hiapp-chat.com" to="621271021001@dev.xmpp.hiapp-chat.com/iOS-D9BDC54B-0B61-410B-8FBB-633B3196A8C7-cb8cf018-5195-47fd-9785-3ab33511a6ab" id="HJPLWRKPU" type="result">
+   <iq from="test2b3626e00-7789-11ec-b82f-6dc971962c7e@exmaple.com" to="abc@exmaple.com/test" id="HJPLWRKPU" type="result">
       <query xmlns="http://jabber.org/protocol/muc#owner">
          <instructions>You need an x:data capable client to configure room</instructions>
          <x xmlns="jabber:x:data" type="form">
-            <title>Configuration of room test2b3626e00-7789-11ec-b82f-6dc971962c7e@conference.dev.xmpp.hiapp-chat.com</title>
+            <title>Configuration of room test2b3626e00-7789-11ec-b82f-6dc971962c7e@exmaple.com</title>
             <field type="hidden" var="FORM_TYPE">
                <value>http://jabber.org/protocol/muc#roomconfig</value>
             </field>
@@ -376,10 +376,10 @@ MONGOOSEIM
 ## EJABBERED
 <?xml version="1.0" encoding="UTF-8"?>
 <xmpp_stone>
-   <iq xml:lang="en" to="627075027401@dev.ejabberd.xmpp.hiapp-chat.com/cd539502dde769f7f3bc45cdc93a1e6a3786f614fef516032578263231115ee9" from="gg4063dc530-ab69-11ec-858f-09cddfaf8df1@conference.dev.ejabberd.xmpp.hiapp-chat.com" type="result" id="ATIDCRCDD">
+   <iq xml:lang="en" to="user@exmaple.com/cd539502dde769f7f3bc45cdc93a1e6a3786f614fef516032578263231115ee9" from="room@exmaple.com" type="result" id="ATIDCRCDD">
       <query xmlns="http://jabber.org/protocol/muc#owner">
          <x xmlns="jabber:x:data" type="form">
-            <title>Configuration of room gg4063dc530-ab69-11ec-858f-09cddfaf8df1@conference.dev.ejabberd.xmpp.hiapp-chat.com</title>
+            <title>Configuration of room gg4063dc530-ab69-11ec-858f-09cddfaf8df1@exmaple.com</title>
             <field var="FORM_TYPE" type="hidden">
                <value>http://jabber.org/protocol/muc#roomconfig</value>
             </field>

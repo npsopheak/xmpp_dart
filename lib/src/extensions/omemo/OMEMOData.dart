@@ -15,7 +15,7 @@ enum OMEMOEncodedType { utf8, base64, hex, bytes }
 /// Success case
 ///
 /// <xmpp_stone>
-///   <iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-cdbf4a3a-04ec-413e-841e-03e2490c3d87' id='AQCVFXQRG' type='result'>
+///   <iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-cdbf4a3a-04ec-413e-841e-03e2490c3d87' id='AQCVFXQRG' type='result'>
 ///     <pubsub xmlns='http://jabber.org/protocol/pubsub'>
 ///       <publish node='urn:xmpp:omemo:2:devices'>
 ///         <item id='current'/>
@@ -56,7 +56,7 @@ class OMEMOGetDevicesResponse extends BaseResponse {
   /// Error case:
   ///
   ///
-  ///<iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-657e41c8-2225-4ca2-8650-b609084e3256' id='JKHXCJXOH' type='error'>
+  ///<iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-657e41c8-2225-4ca2-8650-b609084e3256' id='JKHXCJXOH' type='error'>
   ///   <error code='404' type='cancel'><item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
   ///   </error>
   ///   <pubsub xmlns='http://jabber.org/protocol/pubsub'>
@@ -68,7 +68,7 @@ class OMEMOGetDevicesResponse extends BaseResponse {
   /// Success case:
   ///
   /// <xmpp_stone>
-  /// <iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-96f6a2d3-69fc-4aa4-a0af-6964433055f5' id='VFRSFCMSU' type='result'>
+  /// <iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-96f6a2d3-69fc-4aa4-a0af-6964433055f5' id='VFRSFCMSU' type='result'>
   ///   <pubsub xmlns='http://jabber.org/protocol/pubsub'>
   ///     <items node='urn:xmpp:omemo:2:devices'>
   ///       <item id='current'>
@@ -130,7 +130,7 @@ class OMEMOGetBundleResponse extends BaseResponse {
   final OMEMOEncodedType encoding = OMEMOEncodedType.base64;
 
   /// Success response:
-  /// <iq from="627775027401@dev2.xmpp.hiapp-chat.com" to="627075027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-7fb4b60e-90db-4f93-bbff-bc9faa4641a6" id="SFRCDOWSK" type="result">
+  /// <iq from="bob@example.com" to="627075027401@example.com/Android-f42af6e50523a5f8-7fb4b60e-90db-4f93-bbff-bc9faa4641a6" id="SFRCDOWSK" type="result">
   // <pubsub xmlns="http://jabber.org/protocol/pubsub">
   //   <items node="urn:xmpp:omemo:2:bundles">
   //     <item id="f42af6e50523a5f8">
@@ -202,7 +202,7 @@ class OMEMOPublishBundleResponse extends BaseResponse {
   late String deviceId;
 
   /// Success response:
-  /// <xmpp_stone><iq from='627075827401@dev2.xmpp.hiapp-chat.com' to='627075827401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-a556406d-1756-446d-be30-973895f83314' id='JHRVSASTL' type='result'>
+  /// <xmpp_stone><iq from='alice@example.com' to='alice@example.com/Android-f42af6e50523a5f8-a556406d-1756-446d-be30-973895f83314' id='JHRVSASTL' type='result'>
   /// <pubsub xmlns='http://jabber.org/protocol/pubsub'>
   /// <publish node='urn:xmpp:omemo:2:bundles'>
   /// <item id='f42af6e50523a5f8'/></publish></pubsub></iq></xmpp_stone>

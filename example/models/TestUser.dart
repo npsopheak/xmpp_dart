@@ -35,7 +35,7 @@ class TestUser {
 
     return users;
   }
-
+  
   User generateUser(int i) {
     final host = Preferences.hostName;
     final randomUserPhoneNumber = 20000000 + i;
@@ -93,7 +93,7 @@ class TestUser {
   Map<String, User> generateUsers(int nUser) {
     Map<String, User> users = Map();
 
-    for (var i = 0; i < nUser; i++) {
+    for (var i = 1; i <= nUser; i++) {
       final user = generateUser(i);
       users[user.phoneNumber] = user;
     }
