@@ -10,7 +10,7 @@ void main() {
     test('Should parse success response from publish device list successfully',
         () {
       final xmlDoc = XmlDocument.parse("""
-    <iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-cdbf4a3a-04ec-413e-841e-03e2490c3d87' id='AQCVFXQRG' type='result'>
+    <iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-cdbf4a3a-04ec-413e-841e-03e2490c3d87' id='AQCVFXQRG' type='result'>
       <pubsub xmlns='http://jabber.org/protocol/pubsub'>
         <publish node='urn:xmpp:omemo:2:devices'>
           <item id='current'/>
@@ -27,7 +27,7 @@ void main() {
 
     test('Should parse success response from get device list successfully', () {
       final xmlDoc = XmlDocument.parse("""
-    <iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-96f6a2d3-69fc-4aa4-a0af-6964433055f5' id='VFRSFCMSU' type='result'>
+    <iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-96f6a2d3-69fc-4aa4-a0af-6964433055f5' id='VFRSFCMSU' type='result'>
      <pubsub xmlns='http://jabber.org/protocol/pubsub'>
        <items node='urn:xmpp:omemo:2:devices'>
          <item id='current'>
@@ -49,7 +49,7 @@ void main() {
     });
     test('Should parse error response from get device list successfully', () {
       final xmlDoc = XmlDocument.parse("""
-      <iq from='627775027401@dev2.xmpp.hiapp-chat.com' to='627775027401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-657e41c8-2225-4ca2-8650-b609084e3256' id='JKHXCJXOH' type='error'>
+      <iq from='bob@example.com' to='bob@example.com/Android-f42af6e50523a5f8-657e41c8-2225-4ca2-8650-b609084e3256' id='JKHXCJXOH' type='error'>
         <error code='404' type='cancel'><item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
        </error>
         <pubsub xmlns='http://jabber.org/protocol/pubsub'>
@@ -66,7 +66,7 @@ void main() {
     });
     test('Should parse success response from publish bundle successfully', () {
       final xmlDoc = XmlDocument.parse("""
-    <iq from='627075827401@dev2.xmpp.hiapp-chat.com' to='627075827401@dev2.xmpp.hiapp-chat.com/Android-f42af6e50523a5f8-a556406d-1756-446d-be30-973895f83314' id='JHRVSASTL' type='result'>
+    <iq from='alice@example.com' to='alice@example.com/Android-f42af6e50523a5f8-a556406d-1756-446d-be30-973895f83314' id='JHRVSASTL' type='result'>
       <pubsub xmlns='http://jabber.org/protocol/pubsub'>
         <publish node='urn:xmpp:omemo:2:bundles'>
           <item id='f42af6e50523a5f8'/>

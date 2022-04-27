@@ -299,19 +299,6 @@ class MultiUserChatManager {
         description: 'Accept Multi User Chat invitation to join the Room');
   }
 
-  ///
-  /// <xmpp_stone>
-  ///   <iq from='tseting@conference.dev.xmpp.hiapp-chat.com' to='627775027401@dev.xmpp.hiapp-chat.com/c714d7b25ea373e31640-246580-77685' type='error' xml:lang='en' id='MVEPQWBJA'>
-  ///     <query xmlns='http://jabber.org/protocol/disco#info'/>
-  ///       <error code='404' type='cancel'>
-  ///         <item-not-found xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'/>
-  ///         <text xmlns='urn:ietf:params:xml:ns:xmpp-stanzas'>
-  ///           Conference room does not exist</text>
-  ///       </error>
-  ///   </iq>
-  /// </xmpp_stone>
-  ///
-
   void _processStanza(AbstractStanza? stanza) {
     responseIqHandler.test(stanza!.id ?? "", (res) {
       late GroupResponse response;
