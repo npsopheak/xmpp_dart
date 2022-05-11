@@ -218,8 +218,9 @@ xml:lang='en'
   void reconnect() {
     if (!isOpened()) {
       // Prevent open socket run too many times
-      connExecutionQueue.put(
-          ConnectionExecutionQueueContent(openSocket, true, {}, 'openSocket'));
+      connExecutionQueue.put(ConnectionExecutionQueueContent(
+          openSocket, true, {}, 'openSocket',
+          expectedState: XmppConnectionState.Ready));
       connExecutionQueue.resume();
     }
   }
@@ -233,8 +234,9 @@ xml:lang='en'
     }
     if (_state == XmppConnectionState.Idle) {
       // Prevent open socket run too many times
-      connExecutionQueue.put(
-          ConnectionExecutionQueueContent(openSocket, true, {}, 'openSocket'));
+      connExecutionQueue.put(ConnectionExecutionQueueContent(
+          openSocket, true, {}, 'openSocket',
+          expectedState: XmppConnectionState.Ready));
       connExecutionQueue.resume();
     }
   }
@@ -281,8 +283,9 @@ xml:lang='en'
 
   void close() async {
     // Prevent open socket run too many times
-    connExecutionQueue
-        .put(ConnectionExecutionQueueContent(_close, true, {}, '_close'));
+    connExecutionQueue.put(ConnectionExecutionQueueContent(
+        _close, true, {}, '_close',
+        expectedState: XmppConnectionState.Closed));
     connExecutionQueue.resume();
   }
 
