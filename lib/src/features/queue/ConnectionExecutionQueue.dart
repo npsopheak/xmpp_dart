@@ -8,9 +8,11 @@ class ConnectionExecutionQueueContent {
   final dynamic params;
   final String name;
   final bool unique;
+  final XmppConnectionState expectedState;
 
   const ConnectionExecutionQueueContent(
-      this.func, this.unique, this.params, this.name);
+      this.func, this.unique, this.params, this.name,
+      {required this.expectedState});
 }
 
 class ConnectionExecutionQueue
@@ -58,13 +60,9 @@ class ConnectionExecutionQueue
     }
   }
 
-  bool _isEligible(ConnectionExecutionQueueContent content) {
-    return _connection!.state != XmppConnectionState.Ready;
-  }
-
   @override
-  bool isEligible() {
-    return _connection!.state != XmppConnectionState.Ready;
+  bool isEligible(ConnectionExecutionQueueContent content) {
+    return _connection!.state != content.expectedState;
   }
 
   @override
@@ -79,8 +77,12 @@ class ConnectionExecutionQueue
 
   @override
   Future<bool> pop() async {
-    bool isEligible = await _isEligible(writingQueueContent.elementAt(0));
-    if (isEligible) {
+    if (writingQueueContent.isEmpty) {
+      return false;
+    }
+    final temporalContent = writingQueueContent.elementAt(0);
+    bool _isEligible = await isEligible(temporalContent);
+    if (_isEligible) {
       await execute(writingQueueContent.elementAt(0));
       writingQueueContent.removeAt(0);
       return true;
