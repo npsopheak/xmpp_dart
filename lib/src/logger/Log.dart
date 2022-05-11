@@ -6,20 +6,20 @@ class Log {
   static bool logXmpp = true;
 
   static void v(String tag, String message) {
-    if (logLevel.index <= LogLevel.VERBOSE.index) {
+    if (logXmpp && logLevel.index <= LogLevel.VERBOSE.index) {
       log('V/[$tag]: $message');
     }
   }
 
   static void d(String tag, String message) {
-    if (logLevel.index <= LogLevel.DEBUG.index) {
+    if (logXmpp && logLevel.index <= LogLevel.DEBUG.index) {
       // print('D/[$tag]: $message');
       log('D/[$tag]: $message');
     }
   }
 
   static void i(String tag, String message) {
-    if (logLevel.index <= LogLevel.INFO.index) {
+    if (logXmpp && logLevel.index <= LogLevel.INFO.index) {
       // print('D/[$tag]: $message');
       log('I/[$tag]: $message');
     }
@@ -32,7 +32,7 @@ class Log {
   }
 
   static void e(String tag, String message) {
-    if (logLevel.index <= LogLevel.ERROR.index) {
+    if (logXmpp && logLevel.index <= LogLevel.ERROR.index) {
       log('E/[$tag]: $message');
     }
   }

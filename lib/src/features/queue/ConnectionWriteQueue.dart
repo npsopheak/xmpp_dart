@@ -25,7 +25,7 @@ class WriteContent {
   }
 }
 
-class ConnectionWriteQueue extends QueueApi {
+class ConnectionWriteQueue extends QueueApi<WriteContent> {
   static int idealWriteIntervalMs = 200;
   Queue<WriteContent> writingQueueContent = Queue<WriteContent>();
   late Connection _connection;
@@ -52,8 +52,7 @@ class ConnectionWriteQueue extends QueueApi {
   }
 
   @override
-  Future<bool> execute(content) {
-    final wrtContent = content as WriteContent;
+  Future<bool> execute(WriteContent wrtContent) {
     final Completer<bool> completer = Completer<bool>();
     Timer(Duration(milliseconds: idealWriteIntervalMs), () {
       bool success = true;
@@ -73,13 +72,17 @@ class ConnectionWriteQueue extends QueueApi {
   }
 
   @override
-  bool isEligible() {
+  bool isEligible(WriteContent content) {
     return _connection.state == XmppConnectionState.Ready;
   }
 
   @override
   Future<bool> pop() async {
-    bool _isEligible = isEligible();
+    if (writingQueueContent.isEmpty) {
+      return false;
+    }
+    final temporalContent = writingQueueContent.elementAt(0);
+    bool _isEligible = isEligible(temporalContent);
     if (_isEligible) {
       final wrtContent = writingQueueContent.removeFirst();
       final successExecute = await execute(wrtContent);
@@ -93,8 +96,7 @@ class ConnectionWriteQueue extends QueueApi {
   }
 
   @override
-  put(content) {
-    final wrtContent = content as WriteContent;
+  put(WriteContent wrtContent) {
     writingQueueContent.add(wrtContent);
   }
 

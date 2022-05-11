@@ -3,7 +3,7 @@ abstract class QueueApi<T> {
   put(T content);
   resume();
 
-  bool isEligible();
+  bool isEligible(T content);
   Future<bool> execute(T content);
   Future<bool> pop();
   clear();
