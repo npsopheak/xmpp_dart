@@ -19,6 +19,7 @@ import 'package:xmpp_stone/src/extensions/omemo/OMEMOData.dart';
 import 'package:xmpp_stone/src/extensions/omemo/OMEMOManager.dart';
 import 'package:xmpp_stone/src/extensions/omemo/OMEMOManagerApi.dart';
 import 'package:xmpp_stone/src/extensions/ping/PingManager.dart';
+import 'package:xmpp_stone/src/extensions/vcard_temp/VCard.dart';
 import 'package:xmpp_stone/src/features/message_archive/MessageArchiveData.dart';
 import 'package:xmpp_stone/src/features/message_archive/MessageArchiveManager.dart';
 import 'package:xmpp_stone/src/logger/Log.dart';
@@ -198,15 +199,14 @@ class XMPPClientManager {
   }
 
   // My Profile
-  void vCardRead() {
+  Future<VCard> vCardRead() async {
     var vCardManager = xmpp.VCardManager(_connection!);
-    vCardManager.getSelfVCard().then((vCard) {
-      if (vCard != null) {
-        personel.profile = vCard;
-
-        onLog('Your info' + vCard.buildXmlString());
-      }
-    });
+    final vCard = await vCardManager.getSelfVCard();
+    if (vCard != null) {
+      personel.profile = vCard;
+      onLog('Your info' + vCard.buildXmlString());
+    }
+    return vCard;
   }
 
   void vCardUpdate(xmpp.VCard Function(xmpp.VCard vCardToUpdate) _onUpdate) {
