@@ -8,6 +8,7 @@ import 'package:xmpp_stone/src/elements/XmppElement.dart';
 import 'package:xmpp_stone/src/elements/stanzas/AbstractStanza.dart';
 import 'package:xmpp_stone/src/elements/stanzas/IqStanza.dart';
 import 'package:xmpp_stone/src/extensions/vcard_temp/VCard.dart';
+import 'package:xmpp_stone/src/logger/Log.dart';
 
 class VCardManager {
   static Map<Connection, VCardManager> instances = <Connection, VCardManager>{};
@@ -84,6 +85,8 @@ class VCardManager {
       if (_myUnrespondedIqStanzas[stanza.id] != null) {
         if (stanza.type == IqStanzaType.RESULT) {
           var vCardChild = stanza.getChild('vCard');
+          Log.d('VCARD',
+              'manager.vCardUpdate::my info ${stanza.buildXmlString()}');
           if (vCardChild != null) {
             var vCard = VCard(vCardChild);
             if (stanza.fromJid != null) {

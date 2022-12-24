@@ -5,6 +5,7 @@ import 'package:xmpp_stone/src/elements/XmppAttribute.dart';
 import 'package:xmpp_stone/src/elements/XmppElement.dart';
 
 enum TelephonePremiseType { WORK, HOME }
+
 enum TelephoneVoiceType { VOICE, FAX, MSG }
 
 class VCardTelephone {
@@ -149,6 +150,26 @@ class VCard extends XmppElement {
     attrFN.textValue = fullName;
     vCardElement.addChild(attrFN);
 
+    var attrN = XmppElement();
+    attrN.name = 'N';
+
+    var attrFamilyName = XmppElement();
+    attrFamilyName.name = 'FAMILY';
+    attrFamilyName.textValue = familyName;
+    attrN.addChild(attrFamilyName);
+
+    var attrGivenName = XmppElement();
+    attrGivenName.name = 'GIVEN';
+    attrGivenName.textValue = givenName;
+    attrN.addChild(attrGivenName);
+
+    var attrPrefixName = XmppElement();
+    attrPrefixName.name = 'PREFIX';
+    attrPrefixName.textValue = prefixName;
+    attrN.addChild(attrPrefixName);
+
+    vCardElement.addChild(attrN);
+
     var attrNickname = XmppElement();
     attrNickname.name = 'NICKNAME';
     attrNickname.textValue = nickName;
@@ -156,8 +177,44 @@ class VCard extends XmppElement {
 
     var attrBDay = XmppElement();
     attrBDay.name = 'BDAY';
-    attrBDay.textValue = fullName;
+    attrBDay.textValue = bDay;
     vCardElement.addChild(attrBDay);
+
+    var attrURL = XmppElement();
+    attrURL.name = 'URL';
+    attrURL.textValue = url;
+    vCardElement.addChild(attrURL);
+
+    var attrTitle = XmppElement();
+    attrTitle.name = 'TITLE';
+    attrTitle.textValue = title;
+    vCardElement.addChild(attrTitle);
+
+    var attrRole = XmppElement();
+    attrRole.name = 'ROLE';
+    attrRole.textValue = role;
+    vCardElement.addChild(attrRole);
+
+    var attrJabberId = XmppElement();
+    attrJabberId.name = 'JABBERID';
+    attrJabberId.textValue = jabberId;
+    vCardElement.addChild(attrJabberId);
+
+    var attrOrg = XmppElement();
+    attrOrg.name = 'ORG';
+
+    var attrOrgName = XmppElement();
+    attrOrgName.name = 'ORGNAME';
+    attrOrgName.textValue = organisationName;
+    attrOrg.addChild(attrOrgName);
+
+    var attrOrgUnit = XmppElement();
+    attrOrgUnit.name = 'ORGUNIT';
+    attrOrgUnit.textValue = organisationUnit;
+    attrOrg.addChild(attrOrgUnit);
+
+    vCardElement.addChild(attrOrg);
+
     return vCardElement;
   }
 }
