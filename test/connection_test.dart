@@ -10,6 +10,19 @@ class MockSocket extends Mock implements Socket {}
 
 void main() {
   group('connection.dart', () {
+    
+    group('Test isOpenFunction', () {
+      test('The function should return false when state is ForcefullyClosed', () {
+        final accountSetting =
+            XmppAccountSettings('Alice', 'alice', 'lit', 'foo', 5222);
+        final connection = Connection(accountSetting);
+        connection.setState(XmppConnectionState.ForcefullyClosed); 
+        final isOpened = connection.isOpened();
+        expect(isOpened, false);
+      });
+    });
+
+
     group('handleResponse()', () {
       test('should handle conflict response', () {
         final accountSetting =
